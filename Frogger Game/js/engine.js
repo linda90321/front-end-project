@@ -67,7 +67,12 @@ var Engine = (function(global) {
     function init() {
         reset();
         lastTime = Date.now();
+        document.getElementById('start').onclick = function() {
         main();
+        
+        var instruction = doc.getElementById('instruction');
+        instruction.parentNode.removeChild(instruction);
+        };
     }
 
     /* This function is called by main (our game loop) and itself calls all
