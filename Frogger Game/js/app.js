@@ -106,6 +106,7 @@ var Game = function(){
 
     this.allEnemies = [];
     this.initEnemies();
+    this.stop = false;
 
 }
 
@@ -115,6 +116,15 @@ Game.prototype.initEnemies = function(){
     this.allEnemies.push(enemy);
   };
 };
+
+Game.prototype.gameOver = function(){
+  var gameBoard = document.getElementById('game-board');
+  gameBoard.parentNode.removeChild(gameBoard);
+};
+
+
+
+
     // Now instantiate your objects.
     // Place all enemy objects in an array called allEnemies
     // Place the player object in a variable called player

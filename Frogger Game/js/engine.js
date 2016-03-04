@@ -23,12 +23,15 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime;
+        lastTime,
+        seconds,
+        timer;
         game = new Game();
 
     canvas.width = 505;
     canvas.height = 606;
-    doc.body.appendChild(canvas);
+    //doc.body.appendChild(canvas);
+    doc.getElementById('game-board').appendChild(canvas);
     
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -60,6 +63,55 @@ var Engine = (function(global) {
         win.requestAnimationFrame(main);
     }
 
+        /**
+     * Sets a timer for the game.
+     * @param {number} time Total seconds of the timer
+     * @param {Game} game The new game instance
+     * @return {void}
+     */
+    function setTimer(time, game) {
+        timer = doc.getElementById('timer');
+        seconds = time;
+        // If out of time, game over.
+        // Set game's stop value to true.
+        if (seconds === 0) {
+            game.gameOver();
+            game.stop = true;
+        };
+        // If game's stop value is false, update timer and continue the game.
+        if (!game.stop) {
+            seconds--;
+            updateTimer();
+            win.setTimeout(function(){
+                setTimer(seconds, game);
+            }, 1000); 
+        };
+    }; 
+    /**
+     * Updates the timer each second.
+     * @return {void}
+     */
+    function updateTimer() {
+        var timerStr;
+        var tempSeconds = seconds;
+        var tempMinutes = Math.floor(seconds / 60) % 60;
+        tempSeconds -= tempMinutes * 60;
+        timerStr = formatTimer(tempMinutes, tempSeconds);
+        timer.innerHTML ="Time: " + timerStr;
+    };
+    /**
+     * Format timer string displayed in the game.
+     * @param {number} minutes Remaining minutes of the timer
+     * @param {number} seconds Ramaining seconds of the timer
+     * @return {string}
+     */   
+    function formatTimer(minutes, seconds) {
+        var formattedMinutes = (minutes < 10) ? '0' + minutes : minutes;
+        var formattedSeconds = (seconds < 10) ? '0' + seconds : seconds;
+
+        return formattedMinutes + ":" + formattedSeconds;
+    };
+
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
      * game loop.
@@ -69,8 +121,9 @@ var Engine = (function(global) {
         lastTime = Date.now();
        // doc.getElementById('start').onclick = function() {
         main();
-           
-   
+        setTimer(60,game);
+        
+
 
         var instruction = doc.getElementById('instruction');
         instruction.parentNode.removeChild(instruction);
