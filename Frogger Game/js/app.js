@@ -46,6 +46,7 @@
     this.y = y;
     this.speed = speed;
     this.life = life;
+    this.score = 0;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-boy.png';
@@ -88,6 +89,17 @@
     //alert("enemy : " + enemy.x + " "+ enemy.y);
 
     };
+    
+    Player.prototype.getScore = function(){
+
+        if(this.y < 0){
+            this.x = 202.5;
+            this.y = 380;
+
+            this.score++;
+            document.getElementById('score').innerHTML = "<h2>"+'Score: ' + player.sore+"</h2>";
+        }
+    }; 
 
     var checkCollision = function(anEnemy) {
 
@@ -104,7 +116,7 @@
         // If player's life is more than 0, subtract one life.
         player.life --;
         // Update life.
-        document.getElementById('life').innerHTML = 'Life: ' + player.life;
+        document.getElementById('life').innerHTML = "<h2>"+'Life: ' + player.life+"</h2>";
       }
     }
 
@@ -151,7 +163,7 @@ Game.prototype.gameOver = function(){
     // Place all enemy objects in an array called allEnemies
     // Place the player object in a variable called player
     //var allEnemies = [];
-    var player = new Player(202.5, 380, 50,5);
+var player = new Player(202.5, 380, 50,5);
    // var enemy = new Enemy(0, Math.random() * 160 + 60, Math.random() * 300);
 
     //allEnemies.push(enemy);
