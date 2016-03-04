@@ -121,9 +121,9 @@ var Engine = (function(global) {
         lastTime = Date.now();
        // doc.getElementById('start').onclick = function() {
         main();
-        setTimer(60,game);
+        setTimer(10,game);
         
-
+        doc.getElementById('life').innerHTML = 'Life: ' + player.life;
 
         var instruction = doc.getElementById('instruction');
         instruction.parentNode.removeChild(instruction);

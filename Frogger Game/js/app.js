@@ -27,6 +27,8 @@
     // Check for collision with enemies or barrier-walls
     checkCollision(this);
 
+
+
     };
 
     // Draw the enemy on the screen, required method for game
@@ -37,12 +39,13 @@
     // Now write your own player class
     // This class requires an update(), render() and
     // a handleInput() method.
-    var Player = function(x, y, speed) {
+    var Player = function(x, y, speed, life) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
     this.speed = speed;
+    this.life = life;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-boy.png';
@@ -95,9 +98,17 @@
         &&  player.y <= anEnemy.y + 45){
         player.x = 202.5;
         player.y = 380;
+
+    if (player.life > 0) {
+        //alert("test");
+        // If player's life is more than 0, subtract one life.
+        player.life --;
+        // Update life.
+        document.getElementById('life').innerHTML = 'Life: ' + player.life;
+      }
     }
 
-
+    
 
     };
 
@@ -107,6 +118,7 @@ var Game = function(){
     this.allEnemies = [];
     this.initEnemies();
     this.stop = false;
+    
 
 }
 
@@ -120,7 +132,17 @@ Game.prototype.initEnemies = function(){
 Game.prototype.gameOver = function(){
   var gameBoard = document.getElementById('game-board');
   gameBoard.parentNode.removeChild(gameBoard);
+  var gameOverMessage = document.getElementById('gameOver-message');
+  var zeroLifeMessage = 'Look like your life is zero ' + '<br>';
+  var gameScoreMessage = 'Your final score is ' + player.score;
+  // If life is zero, display zero life message; if run out of time, display the score.
+  if (player.life === 0){
+    gameOverMessage.innerHTML = zeroLifeMessage + gameScoreMessage;
+  } else {
+    gameOverMessage.innerHTML = gameScoreMessage;
+  }
 };
+
 
 
 
@@ -129,7 +151,7 @@ Game.prototype.gameOver = function(){
     // Place all enemy objects in an array called allEnemies
     // Place the player object in a variable called player
     //var allEnemies = [];
-    var player = new Player(202.5, 380, 50);
+    var player = new Player(202.5, 380, 50,5);
    // var enemy = new Enemy(0, Math.random() * 160 + 60, Math.random() * 300);
 
     //allEnemies.push(enemy);
