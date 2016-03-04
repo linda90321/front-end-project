@@ -102,15 +102,27 @@
     };
 
 
+var Game = function(){
 
+    this.allEnemies = [];
+    this.initEnemies();
+
+}
+
+Game.prototype.initEnemies = function(){
+  for (var i = 0; i < 4; i++) {
+    var enemy = new Enemy(0, Math.random() * 160 + 60, Math.random() * 300);
+    this.allEnemies.push(enemy);
+  };
+};
     // Now instantiate your objects.
     // Place all enemy objects in an array called allEnemies
     // Place the player object in a variable called player
-    var allEnemies = [];
+    //var allEnemies = [];
     var player = new Player(202.5, 380, 50);
-    var enemy = new Enemy(0, Math.random() * 160 + 60, Math.random() * 300);
+   // var enemy = new Enemy(0, Math.random() * 160 + 60, Math.random() * 300);
 
-    allEnemies.push(enemy);
+    //allEnemies.push(enemy);
 
     // This listens for key presses and sends the keys to your
     // Player.handleInput() method. You don't need to modify this.
