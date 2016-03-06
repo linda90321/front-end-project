@@ -119,7 +119,7 @@ var Engine = (function(global) {
     function init() {
         reset();
         lastTime = Date.now();
-        doc.getElementById('start').onclick = function() {
+        //doc.getElementById('start').onclick = function() {
         main();
         setTimer(20,game);
         
@@ -134,7 +134,7 @@ var Engine = (function(global) {
         
         var instruction = doc.getElementById('instruction');
         instruction.parentNode.removeChild(instruction);
-        };
+        //};
     }
 
     /* This function is called by main (our game loop) and itself calls all
