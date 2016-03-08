@@ -39,14 +39,14 @@
     // Now write your own player class
     // This class requires an update(), render() and
     // a handleInput() method.
-    var Player = function(x, y, speed, life) {
+    var Player = function(x, y, speed, life, score) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.life = life;
-    this.score = 0;
+    this.score = score;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-boy.png';
@@ -102,9 +102,6 @@
     }; 
 
     var checkCollision = function(anEnemy) {
-
-
-
     if( player.x  <= anEnemy.x + 80 && player.x >=  anEnemy.x -80 
         && player.y >= anEnemy.y - 45 
         &&  player.y <= anEnemy.y + 45){
@@ -112,10 +109,7 @@
         player.y = 380;
 
     if (player.life > 0) {
-        //alert("test");
-        // If player's life is more than 0, subtract one life.
         player.life --;
-        // Update life.
         document.getElementById('life').innerHTML = "<h2>"+'Life: ' + player.life+"</h2>";
       }
     }
@@ -163,7 +157,7 @@ Game.prototype.gameOver = function(){
     // Place all enemy objects in an array called allEnemies
     // Place the player object in a variable called player
     //var allEnemies = [];
-var player = new Player(202.5, 380, 50,5);
+var player = new Player(202.5, 380, 50, 5, 0);
    // var enemy = new Enemy(0, Math.random() * 160 + 60, Math.random() * 300);
 
     //allEnemies.push(enemy);

@@ -119,13 +119,14 @@ var Engine = (function(global) {
     function init() {
         reset();
         lastTime = Date.now();
-        //doc.getElementById('start').onclick = function() {
+        doc.getElementById('start').onclick = function() {
         main();
         setTimer(20,game);
         
         doc.getElementById('life').innerHTML = "<h2>"+'Life: ' + player.life+"</h2>";
       
         doc.getElementById('score').innerHTML = "<h2>"+'Score: ' + player.sore+"</h2>";
+
 
         doc.getElementById('try-again').innerHTML  ="<h4>"+ "Try Again"+"</h4>";
         doc.getElementById('try-again').className = "btn  btn-primary";
@@ -134,7 +135,7 @@ var Engine = (function(global) {
         
         var instruction = doc.getElementById('instruction');
         instruction.parentNode.removeChild(instruction);
-        //};
+        };
     }
 
     /* This function is called by main (our game loop) and itself calls all
