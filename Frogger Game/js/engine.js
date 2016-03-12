@@ -119,13 +119,13 @@ var Engine = (function(global) {
     function init() {
         reset();
         lastTime = Date.now();
-        doc.getElementById('start').onclick = function() {
+      //  doc.getElementById('start').onclick = function() {
         main();
-        setTimer(20,game);
+       // setTimer(20,game);
         
         doc.getElementById('life').innerHTML = "<h2>"+'Life: ' + player.life+"</h2>";
-      
-        doc.getElementById('score').innerHTML = "<h2>"+'Score: ' + player.sore+"</h2>";
+
+        doc.getElementById('score').innerHTML = "<h2>"+'Score: ' + player.score+"</h2>";
 
 
         doc.getElementById('try-again').innerHTML  ="<h4>"+ "Try Again"+"</h4>";
@@ -135,7 +135,7 @@ var Engine = (function(global) {
         
         var instruction = doc.getElementById('instruction');
         instruction.parentNode.removeChild(instruction);
-        };
+       // };
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -149,7 +149,10 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        player.update();
+        player.getScore();
+        player.collectItem();
+       // player.playerHelper.update(dt);
     }
 
     /* This is called by the update function and loops through all of the
@@ -163,8 +166,7 @@ var Engine = (function(global) {
         game.allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
-        player.getScore();
+
     }
 
     /* This function initially draws the "game level", it will then call
@@ -232,6 +234,9 @@ var Engine = (function(global) {
         });
 
         player.render();
+        player.playerHelper.render();  
+        game.render();
+
     }
 
     /* This function does nothing but it could have been a good place to

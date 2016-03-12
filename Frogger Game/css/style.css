@@ -12,3 +12,8 @@ ul {
 .try{
 	display: none;
 }
+
+#timer, #life, #score {
+	border:1px solid black;
+	border-radius: 20px;
+}
