@@ -151,7 +151,7 @@ var Engine = (function(global) {
         updateEntities(dt);
         player.update();
         player.getScore();
-        player.collectItem();
+      //  player.collectItem();
        // player.playerHelper.update(dt);
     }
 
@@ -234,7 +234,7 @@ var Engine = (function(global) {
         });
 
         player.render();
-        player.playerHelper.render();  
+        //player.playerHelper.render();  
         game.render();
 
     }
