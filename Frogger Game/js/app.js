@@ -116,7 +116,7 @@
             this.y = 380;
 
             this.score++;
-            document.getElementById('score').innerHTML = "<h2>"+'Score: ' + player.score+"</h2>";
+            document.getElementById('score').innerHTML = "<h2>"+'Score: ' + this.score+"</h2>";
         }else{
 
             this.x = 202.5;
@@ -138,12 +138,12 @@ Player.prototype.collectItem = function() {
     // If the player collects a heart, add one life.
     if (this.playerHelper.sprite == 'images/Heart.png') {
       this.life ++;
-      document.getElementById('life').innerHTML = 'Life: ' + this.life;
+      document.getElementById('life').innerHTML = "<h2>"+'Life: ' + this.life +"</h2>";
     // If the player collects a blue gem, slow enemies speed for one second.
     } else if (this.playerHelper.sprite == 'images/Gem Blue.png') {
       // Save enemies original speed.
       var originalEnemySpeeds = new Array(3);
-      var allEnemies = this.allEnemies;
+      var allEnemies = game.allEnemies;
       // Slow each enemy's speed.
       for (var i = 0; i < allEnemies.length; i++) {
         originalEnemySpeeds[i] = allEnemies[i].speed;
@@ -154,19 +154,21 @@ Player.prototype.collectItem = function() {
         for (var i = 0; i < originalEnemySpeeds.length; i++) {
           allEnemies[i].speed = originalEnemySpeeds[i];
         }; 
-      }, 1000); 
+      }, 5000); 
     // If the player collects a green gem, add two points.
     } else if (this.playerHelper.sprite == 'images/Gem Green.png') {
       this.score += 2;
-      document.getElementById('score').innerHTML = 'Score: ' + this.score;
+      document.getElementById('score').innerHTML = "<h2>"+'Score: ' + this.score+"</h2>";
     // If the player collects a orange gem, add five points.
     } else if (this.playerHelper.sprite == 'images/Gem Orange.png') {
-      this.score += 5;
-      document.getElementById('score').innerHTML = 'Score: ' + this.score;
+      this.score += 3;
+      document.getElementById('score').innerHTML = "<h2>"+'Score: ' + this.score +"</h2>";
     // If the player collects a rock, it will lose one life :( don't collect rocks in this game.
     } else if (this.playerHelper.sprite == 'images/Rock.png') {
       this.life --;
-      document.getElementById('life').innerHTML = 'Life: ' + this.life;
+      this.x = 202.5;
+      this.y = 380;
+      document.getElementById('life').innerHTML = "<h2>"+'Life: ' + this.life +"</h2>";
     };
     // Once the player hit the helpers, move the helper off the screen.
     this.playerHelper.x = -100;
@@ -266,7 +268,6 @@ PlayerHelper.prototype.loadNewHelper = function() {
  * @return {void}
  */
 PlayerHelper.prototype.render = function() {
-//alert(this.sprite);
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 /**

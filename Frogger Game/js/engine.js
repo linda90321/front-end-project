@@ -119,12 +119,12 @@ var Engine = (function(global) {
     function init() {
         reset();
         lastTime = Date.now();
-      //  doc.getElementById('start').onclick = function() {
+        doc.getElementById('start').onclick = function() {
         main();
-       // setTimer(20,game);
-        
-        doc.getElementById('life').innerHTML = "<h2>"+'Life: ' + player.life+"</h2>";
+        setTimer(60,game);
+        doc.getElementById('index').className="row";
 
+        doc.getElementById('life').innerHTML = "<h2>"+'Life: ' + player.life+"</h2>";
         doc.getElementById('score').innerHTML = "<h2>"+'Score: ' + player.score+"</h2>";
 
 
@@ -135,7 +135,7 @@ var Engine = (function(global) {
         
         var instruction = doc.getElementById('instruction');
         instruction.parentNode.removeChild(instruction);
-       // };
+        };
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -256,7 +256,12 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/Heart.png',
+        'images/Gem Blue.png',
+        'images/Gem Green.png',
+        'images/Gem Orange.png',
+        'images/Rock.png'
     ]);
     Resources.onReady(init);
 
